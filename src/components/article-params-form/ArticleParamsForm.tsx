@@ -13,6 +13,8 @@ import { Button } from 'src/ui/button';
 import { RadioGroup } from 'src/ui/radio-group';
 import { Select } from 'src/ui/select';
 import { useOutsideClickClose } from 'src/ui/select/hooks/useOutsideClickClose';
+import { Separator } from 'src/ui/separator';
+import { Text } from 'src/ui/text';
 
 import type { ArticleStateType, OptionType } from 'src/constants/articleProps';
 
@@ -68,12 +70,22 @@ export const ArticleParamsForm = ({
         <ArrowButton isOpen={isOpen} onClick={handleToggle} />
 
         <aside
-          ref={sidebarRef}
           className={clsx(styles.container, {
             [styles.container_open]: isOpen,
           })}
         >
           <form className={styles.form} onSubmit={handleSubmit}>
+            <Text as="h2" size={31} weight={800} uppercase>
+              Задайте параметры
+            </Text>
+
+            <Select
+              title="Шрифт"
+              options={fontFamilyOptions}
+              selected={formState.fontFamilyOption}
+              onChange={updateFormField('fontFamilyOption')}
+            />
+
             <RadioGroup
               name="font-size"
               title="Размер шрифта"
@@ -83,18 +95,13 @@ export const ArticleParamsForm = ({
             />
 
             <Select
-              title="Шрифт"
-              options={fontFamilyOptions}
-              selected={formState.fontFamilyOption}
-              onChange={updateFormField('fontFamilyOption')}
-            />
-
-            <Select
-              title="Цвет текста"
+              title="Цвет шрифта"
               options={fontColors}
               selected={formState.fontColor}
               onChange={updateFormField('fontColor')}
             />
+
+            <Separator />
 
             <Select
               title="Цвет фона"
